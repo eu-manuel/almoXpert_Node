@@ -6,7 +6,7 @@ const sequelize = new Sequelize(
   process.env.DB_PASS,
   {
     host: process.env.DB_HOST,
-    dialect: "mysql", // ou "postgres"
+    dialect: process.env.DB_DIALECT || "mysql", // mysql ou postgres
     logging: false,
   }
 );

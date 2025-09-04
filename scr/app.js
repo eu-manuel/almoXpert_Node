@@ -9,6 +9,8 @@ app.use(express.json());
 // Rotas
 const userRoutes = require("./routes/userRoutes");
 const itemRoutes = require("./routes/itemRoutes");
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/items", itemRoutes);
 
