@@ -1,6 +1,9 @@
 # Configurações do Banco de Dados
-DB_NAME=almoxpert_db
+DB_NAME=almoXpert_DB
 DB_USER=root
-DB_PASS=suasenha
+DB_PASS='123456789ç'
 DB_HOST=localhost
 DB_DIALECT=mysql
+
+JWT_SECRET=meusegredosecreto
+JWT_EXPIRES=1d
