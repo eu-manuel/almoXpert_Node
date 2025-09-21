@@ -25,12 +25,12 @@ module.exports = {
       responsavel: {
         type: Sequelize.STRING,
       },
-      telefone_contato: {
+      /*telefone_contato: {
         type: Sequelize.STRING,
       },
       email_contato: {
         type: Sequelize.STRING,
-      },
+      },*/
       status: {
         type: Sequelize.ENUM('ativo', 'inativo'),
         defaultValue: 'ativo',
