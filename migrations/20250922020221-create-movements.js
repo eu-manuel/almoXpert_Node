@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("movimentacoes", {
+    await queryInterface.createTable("Movements", {
       id_movimentacao: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "items", // tabela de Item
+          model: "Items", // tabela de Item
           key: "id_item"
         },
         onUpdate: "CASCADE",
@@ -38,7 +38,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "warehouses", // tabela de Warehouse
+          model: "Warehouses", // tabela de Warehouse
           key: "id_almoxarifado"
         },
         onUpdate: "CASCADE",
@@ -48,16 +48,16 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "users", // tabela de User
+          model: "Users", // tabela de User
           key: "id_usuario"
         },
         onUpdate: "CASCADE",
-        onDelete: "SET NULL"
+        onDelete: "RESTRICT"
       }
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("movimentacoes");
+    await queryInterface.dropTable("Movements");
   }
 };
