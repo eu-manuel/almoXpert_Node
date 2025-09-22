@@ -16,9 +16,12 @@ const WarehouseRoutes = require("./routes/warehouseRoutes");
 const movementRoutes = require("./routes/movementRoutes");
 const permissionsRoutes = require("./routes/permissionRoutes");
 
+
 //tabelas de relacionamento
 const itemCategoryRoutes = require("./routes/itemCategoryRoutes");
 const itemSupplierRoutes = require("./routes/itemSupplierRoutes");
+const itemWarehouseRoutes = require("./routes/itemWarehouseRoutes");
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -32,6 +35,8 @@ app.use("/api/permissions", permissionsRoutes);
 //tabelas de relacionamento
 app.use("/api/item-categories", itemCategoryRoutes);
 app.use("/api/item-suppliers", itemSupplierRoutes);
+app.use("/api/item-warehouses", itemWarehouseRoutes);
+
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Servidor rodando na porta ${process.env.PORT || 3000}`);
