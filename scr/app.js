@@ -13,6 +13,7 @@ const authRoutes = require("./routes/authRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const supplierRoutes = require("./routes/supplierRoutes");
 const WarehouseRoutes = require("./routes/warehouseRoutes");
+const movementRoutes = require("./routes/movementRoutes");
 const permissionsRoutes = require("./routes/permissionRoutes");
 
 app.use("/api/auth", authRoutes);
@@ -20,6 +21,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/supplier", supplierRoutes);
+app.use("/api/moviment", movementRoutes);
 app.use("/api/warehouse", WarehouseRoutes);
 app.use("/api/permissions", permissionsRoutes);
 
