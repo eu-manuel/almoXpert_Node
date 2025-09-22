@@ -21,6 +21,7 @@ const permissionsRoutes = require("./routes/permissionRoutes");
 const itemCategoryRoutes = require("./routes/itemCategoryRoutes");
 const itemSupplierRoutes = require("./routes/itemSupplierRoutes");
 const itemWarehouseRoutes = require("./routes/itemWarehouseRoutes");
+const userPermissionRoutes = require("./routes/userPermissionRoutes");
 
 
 app.use("/api/auth", authRoutes);
@@ -36,6 +37,8 @@ app.use("/api/permissions", permissionsRoutes);
 app.use("/api/item-categories", itemCategoryRoutes);
 app.use("/api/item-suppliers", itemSupplierRoutes);
 app.use("/api/item-warehouses", itemWarehouseRoutes);
+app.use("/api/user-permissions", userPermissionRoutes);
+
 
 
 app.listen(process.env.PORT || 3000, () => {
