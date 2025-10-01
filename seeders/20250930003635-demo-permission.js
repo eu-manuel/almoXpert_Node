@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('permissions', [
+    await queryInterface.bulkInsert('Permissions', [
       { nome: 'ADMIN', descricao: 'Acesso total ao sistema' },
       { nome: 'MANAGE_USERS', descricao: 'Gerenciar usuários' },
       { nome: 'MANAGE_SUPPLIERS', descricao: 'Gerenciar fornecedores' },
@@ -12,6 +12,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('permissions', null, {});
+    await queryInterface.bulkDelete('Permissions', null, {});
   }
 };
