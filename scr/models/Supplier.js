@@ -33,7 +33,7 @@ const Supplier = sequelize.define("Supplier", {
     allowNull: true,
   },
 }, {
-  tableName: "suppliers",
+  tableName: "Suppliers",
   timestamps: false,
 });
 

@@ -18,7 +18,7 @@ const Permission = sequelize.define("Permission", {
     type: DataTypes.STRING // explicação do que a permissão faz
   }
 }, {
-  tableName: "permissions",
+  tableName: "Permissions",
   timestamps: false
 });
 
