@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
+const User = require("./User");
 
 const Warehouse = sequelize.define(
   "Warehouse",
@@ -22,11 +23,14 @@ const Warehouse = sequelize.define(
     capacidade_maxima: {
       type: DataTypes.INTEGER,
     },
-    responsavel: {
-      type: DataTypes.STRING,
+    responsavel_id: { // chave estrangeira para User
+      type: DataTypes.INTEGER,
+      references: {
+        model: User,
+        key: "id_usuario",
+      },
+      allowNull: false,
     },
-    // telefone_contato: { type: DataTypes.STRING },
-    // email_contato: { type: DataTypes.STRING },
     status: {
       type: DataTypes.ENUM("ativo", "inativo"),
       defaultValue: "ativo",
@@ -37,5 +41,8 @@ const Warehouse = sequelize.define(
     timestamps: false,
   }
 );
+
+// Associação
+Warehouse.belongsTo(User, {foreignKey: "responsavel_id", as: "responsavel"});
 
 module.exports = Warehouse;
