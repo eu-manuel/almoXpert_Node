@@ -19,8 +19,8 @@ const ItemSupplier = sequelize.define("ItemSupplier", {
     allowNull: true, // ex: "7 dias"
   }
 }, {
-  tableName: "item_suppliers",
-  timestamps: true,
+  tableName: "ItemSuppliers",
+  timestamps: false,
 });
 
 // Definição dos relacionamentos N:N

@@ -1,6 +1,6 @@
 // models/supplier.js
 const { DataTypes } = require("sequelize");
-const sequelize = require("../config/db"); // ajuste o caminho do seu sequelize
+const sequelize = require("../config/db");
 
 const Supplier = sequelize.define("Supplier", {
   id: {
@@ -34,7 +34,7 @@ const Supplier = sequelize.define("Supplier", {
   },
 }, {
   tableName: "suppliers",
-  timestamps: true, // ou true se quiser createdAt/updatedAt
+  timestamps: false,
 });
 
 module.exports = Supplier;

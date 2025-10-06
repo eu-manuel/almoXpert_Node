@@ -56,7 +56,7 @@ const Movement = sequelize.define("Movement", {
     onDelete: "SET NULL"
   }
 }, {
-  tableName: "movimentacoes",
+  tableName: "Movements",
   timestamps: false
 });
 

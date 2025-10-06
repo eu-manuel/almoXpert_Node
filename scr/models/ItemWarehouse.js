@@ -24,7 +24,13 @@ const ItemWarehouse = sequelize.define("ItemWarehouse", {
     type: DataTypes.DATE, 
     allowNull: true 
   }
-});
+},{
+  tableName: "ItemWarehouses",
+  timestamps: false
+}
+
+
+);
 
 // Relações N:N
 Item.belongsToMany(Warehouse, { through: ItemWarehouse, foreignKey: "id_item" });

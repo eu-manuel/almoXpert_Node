@@ -26,7 +26,7 @@ const UserPermission = sequelize.define("UserPermission", {
     primaryKey: true
   }
 }, {
-  tableName: "user_permissions",
+  tableName: "UserPermissions",
   timestamps: false
 });
 

@@ -4,9 +4,20 @@ const Item = require("./Item");
 const Category = require("./Category");
 
 // Tabela intermediária
-const ItemCategory = sequelize.define("ItemCategory", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
-});
+const ItemCategory = sequelize.define(
+  "ItemCategory",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+  },
+  {
+    tableName: "ItemCategories",
+    timestamps: false,
+  }
+);
 
 // Definição das relações N:N
 Item.belongsToMany(Category, { through: ItemCategory, foreignKey: "id_item" });
