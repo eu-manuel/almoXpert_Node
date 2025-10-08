@@ -1,44 +1,75 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-exports.register = async (req, res) => {
-  try {
-    const { nome, email, senha, cargo } = req.body;
-    const hashed = await bcrypt.hash(senha, 10);
-    const user = await User.create({ nome, email, senha: hashed, cargo });
-    res.json(user);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
+const UserController = {
+  async listUsers(req, res) {
+    try {
+      const users = await User.findAll();
+      res.json(users);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
 
-exports.login = async (req, res) => {
-  try {
-    const { email, senha } = req.body;
-    const user = await User.findOne({ where: { email } });
-    if (!user) return res.status(404).json({ error: "Usuário não encontrado!" });
+  async getUserById(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await User.findOne({ where: { id_usuario: id } });
 
-    const valid = await bcrypt.compare(senha, user.senha);
-    if (!valid) return res.status(400).json({ error: "Senha inválida!" });
-
-    const token = jwt.sign(
-      { id: user.id_usuario, cargo: user.cargo },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    // Retornando token + dados do usuário
-    res.json({
-      token,
-      user: {
-        id: user.id_usuario,
-        nome: user.nome,   
-        email: user.email,
-        cargo: user.cargo,
+      if (!user) {
+        return res.status(404).json({ error: "Usuário não encontrado" });
       }
-    });
-  } catch (err) {
-    res.status(500).json({ error: "Erro no login" });
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  async updateUser(req, res) {
+    try {
+      const { id } = req.params;
+      const { nome, email, role } = req.body;
+
+      const missingFields = [];
+      if (!nome) missingFields.push("nome");
+      if (!email) missingFields.push("email");
+      if (!role) missingFields.push("role");
+
+      if (missingFields.length > 0) {
+        return res.status(400).json({ 
+          error: `Os seguintes campos são obrigatórios: ${missingFields.join(", ")}` 
+        });
+      }
+
+      const [updated] = await User.update(
+        { nome, email, role },
+        { where: { id_usuario: id } }
+      );
+
+      if (!updated) {
+        return res.status(404).json({ error: "Usuário não encontrado" });
+      }
+
+      res.json({ message: "Usuário atualizado com sucesso" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  async deleteUser(req, res) {
+    try {
+      const { id } = req.params;
+      const deleted = await User.destroy({ where: { id_usuario: id } });
+
+      if (!deleted) {
+        return res.status(404).json({ error: "Usuário não encontrado" });
+      }
+
+      res.json({ message: "Usuário removido" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
   }
 };
+
+module.exports = UserController;
