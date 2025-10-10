@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
 const auth = require("../middlewares/auth");
+const { validateUpdateUser }= require("../middlewares/validateUser")
 
 /**
  * @route GET /api/users
@@ -33,7 +34,7 @@ router.get("/:id", auth, userController.getUserById);
  * @body {Object} updateData - The fields to update (name, email, role, etc.)
  * @returns {Object} The updated user information (excluding sensitive data)
  */
-router.put("/:id", auth, userController.updateUser);
+router.put("/:id", validateUpdateUser, userController.updateUser);
 
 /**
  * @route DELETE /api/users/:id
