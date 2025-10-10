@@ -34,7 +34,7 @@ router.get("/:id", auth, userController.getUserById);
  * @body {Object} updateData - The fields to update (name, email, role, etc.)
  * @returns {Object} The updated user information (excluding sensitive data)
  */
-router.put("/:id", validateUpdateUser, userController.updateUser);
+router.put("/:id", auth, validateUpdateUser, userController.updateUser);
 
 /**
  * @route DELETE /api/users/:id
