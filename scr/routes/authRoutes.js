@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/authController");
-const {validateCreateUser} = require("../middlewares/validateUser")
+const validateUser = require("../middlewares/validateUser")
 
 /**
  * @route POST /api/auth/login
@@ -24,6 +24,6 @@ router.post("/login",  authController.login);
  * @body {string} userData.password - User's password
  * @returns {Object} Created user information (excluding sensitive data)
  */
-router.post("/register", validateCreateUser, authController.register);
+router.post("/register", validateUser.create, authController.register);
 
 module.exports = router;
