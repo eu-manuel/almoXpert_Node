@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const supplierController = require("../controllers/supplierController");
 const auth = require("../middlewares/auth");
+const validateSupplier = require("../middlewares/validateSupplier");
 
 /**
  * @route POST /api/supplier
@@ -15,7 +16,7 @@ const auth = require("../middlewares/auth");
  * @body {string} supplierData.endereco - Supplier physical address
  * @returns {Object} The newly created supplier
  */
-router.post("/", auth, supplierController.createSupplier);
+router.post("/", auth, validateSupplier.create, supplierController.createSupplier);
 
 /**
  * @route GET /api/supplier
@@ -42,7 +43,7 @@ router.get("/:id", auth, supplierController.getSupplierById);
  * @body {Object} updateData - The fields to update (name, email, phone, address)
  * @returns {Object} The updated supplier information
  */
-router.put("/:id", auth, supplierController.updateSupplier);
+router.put("/:id", auth, validateSupplier.update, supplierController.updateSupplier);
 
 /**
  * @route DELETE /api/supplier/:id
