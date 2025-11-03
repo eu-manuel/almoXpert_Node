@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const itemController = require("../controllers/itemController");
 const auth = require("../middlewares/auth");
+const validateItem = require("../middlewares/validateItem");
 
 /**
  * @route POST /api/items
@@ -18,7 +19,7 @@ const auth = require("../middlewares/auth");
  * @body {string} [itemData.status] - Item status ("ativo" or "inativo", default "ativo")
  * @returns {Object} The newly created item
  */
-router.post("/", auth, itemController.createItem);
+router.post("/", auth, validateItem.create, itemController.createItem);
 /**
  * @route GET /api/items
  * @description Retrieve all items from the inventory
@@ -44,7 +45,7 @@ router.get("/:id", auth, itemController.getItemById);
  * @body {Object} updateData - The fields to update (name, description, quantity, etc.)
  * @returns {Object} The updated item information
  */
-router.put("/:id", auth, itemController.updateItem);
+router.put("/:id", auth, validateItem.update, itemController.updateItem);
 
 /**
  * @route DELETE /api/items/:id
