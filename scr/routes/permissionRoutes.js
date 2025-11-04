@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const permissionController = require("../controllers/permissionController");
 const auth = require("../middlewares/auth");
+const { validatePermissionCreate, validatePermissionUpdate } = require("../middlewares/validatePermission");
 
 /**
  * @route POST /api/permissions
@@ -12,7 +13,7 @@ const auth = require("../middlewares/auth");
  * @body {string} permissionData.description - Permission description
  * @returns {Object} The newly created permission
  */
-router.post("/", auth, permissionController.createPermission);
+router.post("/", auth, validatePermissionCreate, permissionController.createPermission);
 
 /**
  * @route GET /api/permissions
@@ -39,7 +40,7 @@ router.get("/:id", auth, permissionController.getPermissionById);
  * @body {Object} updateData - The fields to update (name, description, resource, action)
  * @returns {Object} The updated permission information
  */
-router.put("/:id", auth, permissionController.updatePermission);
+router.put("/:id", auth, validatePermissionUpdate, permissionController.updatePermission);
 
 /**
  * @route DELETE /api/permissions/:id
