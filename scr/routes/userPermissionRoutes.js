@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userPermissionController = require("../controllers/userPermissionController");
 const auth = require("../middlewares/auth");
+const { validateUserPermissionCreate } = require("../middlewares/validateUserPermission");
 
 /**
  * @route POST /api/user-permissions
@@ -12,7 +13,7 @@ const auth = require("../middlewares/auth");
  * @body {number} grantData.id_permissao - ID of the permission to grant
  * @returns {Object} The created user-permission relationship
  */
-router.post("/", auth, userPermissionController.addPermissionToUser);
+router.post("/", auth, validateUserPermissionCreate, userPermissionController.addPermissionToUser);
 
 /**
  * @route GET /api/user-permissions/user/:id_usuario
