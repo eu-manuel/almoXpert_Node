@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const itemCategoryController = require("../controllers/itemCategoryController");
 const auth = require("../middlewares/auth");
+const { validateItemCategoryCreate } = require("../middlewares/validateItemCategory");
 
 /**
  * @route GET /api/item-categories
@@ -18,7 +19,7 @@ router.get("/", auth, itemCategoryController.getAllRelations);
  * @body {Object} relationData - Contains itemId and categoryId
  * @returns {Object} The newly created item-category relationship
  */
-router.post("/", auth, itemCategoryController.addRelation);
+router.post("/", auth, validateItemCategoryCreate, itemCategoryController.addRelation);
 
 /**
  * @route DELETE /api/item-categories

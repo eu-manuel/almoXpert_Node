@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const itemWarehouseController = require("../controllers/itemWarehouseController");
 const auth = require("../middlewares/auth");
+const { validateItemWarehouseCreate, validateItemWarehouseUpdate } = require("../middlewares/validateItemWarehouse");
 
 /**
  * @route POST /api/item-warehouses
@@ -15,7 +16,7 @@ const auth = require("../middlewares/auth");
  * @body {Date} [entryData.data_saida] - Exit date (optional)
  * @returns {Object} The created item-warehouse relationship
  */
-router.post("/", auth, itemWarehouseController.createItemWarehouse);
+router.post("/", auth, validateItemWarehouseCreate, itemWarehouseController.createItemWarehouse);
 
 
 /**
@@ -44,7 +45,7 @@ router.get("/:id", auth, itemWarehouseController.getItemWarehouseById);
  * @body {number} updateData.quantity - New quantity of the item in the warehouse
  * @returns {Object} The updated item-warehouse relationship
  */
-router.put("/:id", auth, itemWarehouseController.updateItemWarehouse);
+router.put("/:id", auth, validateItemWarehouseUpdate, itemWarehouseController.updateItemWarehouse);
 
 /**
  * @route DELETE /api/item-warehouses/:id

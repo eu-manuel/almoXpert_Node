@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const categoryController = require("../controllers/categoryController");
 const auth = require("../middlewares/auth");
+const validateCategory = require("../middlewares/validateCategory")
 
 /**
  * @route POST /api/categories
@@ -12,7 +13,7 @@ const auth = require("../middlewares/auth");
  * @body {string} categoryData.description - Category description
  * @returns {Object} The newly created category
  */
-router.post("/", auth, categoryController.createCategory);
+router.post("/", auth, validateCategory.create, categoryController.createCategory);
 
 /**
  * @route GET /api/category
@@ -39,7 +40,7 @@ router.get("/:id", auth, categoryController.getCategoryById);
  * @body {Object} updateData - The fields to update (name, description)
  * @returns {Object} The updated category information
  */
-router.put("/:id", auth, categoryController.updateCategory);
+router.put("/:id", auth, validateCategory.update, categoryController.updateCategory);
 
 /**
  * @route DELETE /api/category/:id

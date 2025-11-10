@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const warehouseController = require("../controllers/warehouseController");
 const auth = require("../middlewares/auth");
+const { validateWarehouseCreate, validateWarehouseUpdate } = require("../middlewares/validateWarehouse");
 
 /**
  * @route POST /api/warehouse
@@ -16,7 +17,7 @@ const auth = require("../middlewares/auth");
  * @body {string} [warehouseData.status] - Warehouse status ("ativo" or "inativo", default "ativo")
  * @returns {Object} The newly created warehouse
  */
-router.post("/", auth, warehouseController.createWarehouse);
+router.post("/", auth, validateWarehouseCreate, warehouseController.createWarehouse);
 
 
 /**
@@ -44,7 +45,7 @@ router.get("/:id", auth, warehouseController.getWarehouseById);
  * @body {Object} updateData - The fields to update (name, location, description)
  * @returns {Object} The updated warehouse information
  */
-router.put("/:id", auth, warehouseController.updateWarehouse);
+router.put("/:id", auth, validateWarehouseUpdate, warehouseController.updateWarehouse);
 
 /**
  * @route DELETE /api/warehouse/:id

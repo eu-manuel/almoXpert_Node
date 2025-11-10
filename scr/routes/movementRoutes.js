@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const movementController = require("../controllers/movementController");
 const auth = require("../middlewares/auth");
+const { validateMovementCreate, validateMovementUpdate } = require("../middlewares/validateMovement");
 
 /**
  * @route POST /api/moviment
@@ -17,7 +18,7 @@ const auth = require("../middlewares/auth");
  * @body {Date} [movementData.data_movimentacao] - Date of the movement (optional, defaults to current date)
  * @returns {Object} The newly created movement record
  */
-router.post("/", auth, movementController.createMovement);
+router.post("/", auth, validateMovementCreate, movementController.createMovement);
 
 /**
  * @route GET /api/moviment
@@ -44,7 +45,7 @@ router.get("/:id", auth, movementController.getMovementById);
  * @body {Object} updateData - The fields to update
  * @returns {Object} The updated movement information
  */
-router.put("/:id", auth, movementController.updateMovement);
+router.put("/:id", auth, validateMovementUpdate, movementController.updateMovement);
 
 /**
  * @route DELETE /api/moviment/:id
