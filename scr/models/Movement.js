@@ -47,7 +47,7 @@ const Movement = sequelize.define("Movement", {
   },
   id_usuario: { 
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true, // Permite NULL para SET NULL funcionar
     references: {
       model: User,
       key: "id_usuario"
