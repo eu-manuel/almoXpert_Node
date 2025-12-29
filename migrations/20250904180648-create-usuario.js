@@ -24,14 +24,6 @@ module.exports = {
       cargo: {
         type: Sequelize.STRING,
         allowNull: false
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },

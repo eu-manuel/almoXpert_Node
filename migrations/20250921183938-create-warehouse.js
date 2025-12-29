@@ -22,28 +22,19 @@ module.exports = {
       capacidade_maxima: {
         type: Sequelize.INTEGER,
       },
-      responsavel: {
-        type: Sequelize.STRING,
+      responsavel_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id_usuario',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT',
       },
-      /*telefone_contato: {
-        type: Sequelize.STRING,
-      },
-      email_contato: {
-        type: Sequelize.STRING,
-      },*/
       status: {
         type: Sequelize.ENUM('ativo', 'inativo'),
         defaultValue: 'ativo',
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
       },
     });
   },

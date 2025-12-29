@@ -46,13 +46,13 @@ module.exports = {
       },
       id_usuario: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "Users", // tabela de User
           key: "id_usuario"
         },
         onUpdate: "CASCADE",
-        onDelete: "RESTRICT"
+        onDelete: "SET NULL"
       }
     });
   },

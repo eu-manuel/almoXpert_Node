@@ -25,23 +25,10 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: true,
-        validate: {
-          isEmail: true,
-        },
       },
       endereco: {
         type: Sequelize.STRING,
         allowNull: true,
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn("NOW"),
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn("NOW"),
       },
     });
   },
