@@ -1,4 +1,19 @@
 const Warehouse = require("../models/Warehouse");
+const User = require("../models/User");
+
+// Listar almoxarifados do usuário logado (responsável)
+exports.getMyWarehouses = async (req, res) => {
+  try {
+    const userId = req.user.id; // ID do usuário extraído do token JWT
+    const warehouses = await Warehouse.findAll({
+      where: { responsavel_id: userId },
+      include: [{ model: User, as: "responsavel", attributes: ["id_usuario", "nome", "email"] }]
+    });
+    res.json(warehouses);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 // Criar almoxarifado
 exports.createWarehouse = async (req, res) => {

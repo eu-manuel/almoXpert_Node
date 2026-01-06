@@ -40,10 +40,18 @@ exports.createItemWarehouse = async (req, res) => {
   }
 };
 
-// Listar todos os vínculos (estoque por almoxarifado)
+// Listar vínculos (estoque por almoxarifado) - com filtro opcional
 exports.getItemWarehouses = async (req, res) => {
   try {
+    const { id_almoxarifado, id_item } = req.query;
+    
+    // Construir filtro dinâmico
+    const where = {};
+    if (id_almoxarifado) where.id_almoxarifado = id_almoxarifado;
+    if (id_item) where.id_item = id_item;
+
     const itemWarehouses = await ItemWarehouse.findAll({
+      where,
       include: [Item, Warehouse],
     });
     res.json(itemWarehouses);

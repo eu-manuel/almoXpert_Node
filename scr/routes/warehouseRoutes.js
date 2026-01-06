@@ -21,6 +21,14 @@ router.post("/", auth, validateWarehouseCreate, warehouseController.createWareho
 
 
 /**
+ * @route GET /api/warehouse/my
+ * @description Retrieve all warehouses where the logged user is responsible
+ * @access Private - Requires authentication
+ * @returns {Array} List of warehouses the user is responsible for
+ */
+router.get("/my", auth, warehouseController.getMyWarehouses);
+
+/**
  * @route GET /api/warehouse
  * @description Retrieve all warehouses in the system
  * @access Private - Requires authentication
