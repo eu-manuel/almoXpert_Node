@@ -10,6 +10,22 @@ const ItemWarehouse = sequelize.define("ItemWarehouse", {
     primaryKey: true, 
     autoIncrement: true 
   },
+  id_item: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Item,
+      key: "id_item"
+    }
+  },
+  id_almoxarifado: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Warehouse,
+      key: "id_almoxarifado"
+    }
+  },
   quantidade: { 
     type: DataTypes.INTEGER, 
     allowNull: false, 
@@ -27,12 +43,13 @@ const ItemWarehouse = sequelize.define("ItemWarehouse", {
 },{
   tableName: "ItemWarehouses",
   timestamps: false
-}
+});
 
+// Associações diretas para uso com include
+ItemWarehouse.belongsTo(Item, { foreignKey: "id_item" });
+ItemWarehouse.belongsTo(Warehouse, { foreignKey: "id_almoxarifado" });
 
-);
-
-// Relações N:N
+// Relações N:N (mantidas para uso com Item.getWarehouses(), etc)
 Item.belongsToMany(Warehouse, { through: ItemWarehouse, foreignKey: "id_item" });
 Warehouse.belongsToMany(Item, { through: ItemWarehouse, foreignKey: "id_almoxarifado" });
 
