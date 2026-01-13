@@ -19,18 +19,19 @@ const warehouseCreateSchema = z.object({
         .optional(),
     capacidade_maxima: z
         .number({
-            required_error: "A capacidade máxima é obrigatória.",
             invalid_type_error: "A capacidade máxima deve ser um número.",
         })
         .int("A capacidade máxima deve ser um número inteiro.")
-        .positive("A capacidade máxima deve ser um número positivo."),
+        .positive("A capacidade máxima deve ser um número positivo.")
+        .optional()
+        .nullable(),
     responsavel_id: z
         .number({
-            required_error: "O ID do responsável é obrigatório.",
             invalid_type_error: "O ID do responsável deve ser um número.",
         })
         .int("O ID do responsável deve ser um número inteiro.")
-        .positive("O ID do responsável deve ser um número positivo."),
+        .positive("O ID do responsável deve ser um número positivo.")
+        .optional(), // Vem do token JWT, não do body,
     status: z
         .enum(["ativo", "inativo"], {
             invalid_type_error: "O status deve ser 'ativo' ou 'inativo'.",

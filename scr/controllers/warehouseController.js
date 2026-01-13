@@ -18,7 +18,11 @@ exports.getMyWarehouses = async (req, res) => {
 // Criar almoxarifado
 exports.createWarehouse = async (req, res) => {
   try {
-    const warehouse = await Warehouse.create(req.body);
+    const userId = req.user.id; // ID do usuário extraído do token JWT
+    const warehouse = await Warehouse.create({
+      ...req.body,
+      responsavel_id: userId // Define o usuário logado como responsável
+    });
     res.status(201).json(warehouse);
   } catch (err) {
     res.status(400).json({ error: err.message });
