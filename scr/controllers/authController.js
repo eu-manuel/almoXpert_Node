@@ -17,7 +17,7 @@ const AuthController = {
         return res.status(401).json({ error: "Senha incorreta" });
 
       const token = jwt.sign(
-        { id: user.id_usuario, nome: user.nome, role: user.role },
+        { id: user.id_usuario, nome: user.nome, email: user.email, cargo: user.cargo },
         process.env.JWT_SECRET,
         {
           expiresIn: "1h",
