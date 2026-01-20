@@ -2,7 +2,7 @@
  * Middleware para verificar se o usuário é administrador
  * Deve ser usado APÓS o middleware auth
  * 
- * O cargo do usuário vem do token JWT decodificado em req.user.cargo
+ * O campo isAdmin vem do token JWT decodificado em req.user.isAdmin
  */
 function isAdmin(req, res, next) {
   // Verifica se o middleware auth foi executado antes
@@ -12,8 +12,8 @@ function isAdmin(req, res, next) {
     });
   }
 
-  // Verifica se o cargo do usuário é "admin"
-  if (req.user.cargo !== "admin") {
+  // Verifica se o usuário é admin (booleano)
+  if (!req.user.isAdmin) {
     return res.status(403).json({ 
       error: "Acesso negado. Apenas administradores podem realizar esta ação." 
     });
