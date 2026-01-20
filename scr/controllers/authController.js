@@ -17,7 +17,7 @@ const AuthController = {
         return res.status(401).json({ error: "Senha incorreta" });
 
       const token = jwt.sign(
-        { id: user.id_usuario, nome: user.nome, email: user.email, cargo: user.cargo },
+        { id: user.id_usuario, nome: user.nome, email: user.email, isAdmin: user.isAdmin },
         process.env.JWT_SECRET,
         {
           expiresIn: "1h",
@@ -37,20 +37,20 @@ const AuthController = {
 
   async register(req, res) {
     try {
-      const { nome, email, senha, cargo } = req.body;
-      if (!nome || !email || !senha || !cargo)
-        return res.status(400).json({ error: "Nome, email e senha e cargo são obrigatórios" });
+      const { nome, email, senha } = req.body;
+      if (!nome || !email || !senha)
+        return res.status(400).json({ error: "Nome, email e senha são obrigatórios" });
 
       const userExist = await User.findOne({ where: { email } });
       if (userExist)
         return res.status(400).json({ error: "Email já cadastrado" });
 
       const hashed = await bcrypt.hash(senha, 10);
-      const user = await User.create({ nome, email, senha: hashed, cargo });
+      const user = await User.create({ nome, email, senha: hashed, isAdmin: false });
 
       res.status(201).json({
         message: "Usuário registrado com sucesso",
-        user: { id: user.id_usuario, nome: user.nome, email: user.email, cargo: user.cargo},
+        user: { id: user.id_usuario, nome: user.nome, email: user.email, isAdmin: user.isAdmin },
       });
     } catch (err) {
       res.status(500).json({ error: "Erro ao registrar usuário", details: err.message });

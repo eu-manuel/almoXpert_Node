@@ -28,12 +28,12 @@ const UserController = {
   async updateUser(req, res) {
   try {
     const { id } = req.params;
-    const { nome, email, cargo } = req.body;
+    const { nome, email, isAdmin } = req.body;
 
     // Verifica se pelo menos um campo foi enviado
-    if (!nome && !email && !cargo) {
+    if (!nome && !email && isAdmin === undefined) {
       return res.status(400).json({
-        error: "É necessário enviar pelo menos um campo para atualização (nome, email ou role).",
+        error: "É necessário enviar pelo menos um campo para atualização (nome, email ou isAdmin).",
       });
     }
 
@@ -47,7 +47,7 @@ const UserController = {
     const updatedUser = {
       nome: nome ?? user.nome,   // se nome vier undefined, mantém o anterior
       email: email ?? user.email,
-      cargo: cargo ?? user.cargo,
+      isAdmin: isAdmin ?? user.isAdmin,
     };
 
     await user.update(updatedUser);
