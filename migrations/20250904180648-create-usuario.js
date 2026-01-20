@@ -21,9 +21,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      cargo: {
-        type: Sequelize.STRING,
-        allowNull: false
+      isAdmin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
       }
     });
   },
