@@ -1,8 +1,10 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const userPermissionController = require("../controllers/userPermissionController");
-const auth = require("../middlewares/auth");
-const { validateUserPermissionCreate } = require("../middlewares/validateUserPermission");
+const userPermissionController = require('../controllers/userPermissionController');
+const auth = require('../middlewares/auth');
+const {
+  validateUserPermissionCreate,
+} = require('../middlewares/validateUserPermission');
 
 /**
  * @route POST /api/user-permissions
@@ -13,7 +15,12 @@ const { validateUserPermissionCreate } = require("../middlewares/validateUserPer
  * @body {number} grantData.id_permissao - ID of the permission to grant
  * @returns {Object} The created user-permission relationship
  */
-router.post("/", auth, validateUserPermissionCreate, userPermissionController.addPermissionToUser);
+router.post(
+  '/',
+  auth,
+  validateUserPermissionCreate,
+  userPermissionController.addPermissionToUser
+);
 
 /**
  * @route GET /api/user-permissions/user/:id_usuario
@@ -22,7 +29,11 @@ router.post("/", auth, validateUserPermissionCreate, userPermissionController.ad
  * @param {string} id_usuario - The ID of the user whose permissions to retrieve
  * @returns {Array} List of permissions granted to the user
  */
-router.get("/user/:id_usuario", auth, userPermissionController.getUserPermissions);
+router.get(
+  '/user/:id_usuario',
+  auth,
+  userPermissionController.getUserPermissions
+);
 
 /**
  * @route GET /api/user-permissions/permission/:id_permissao
@@ -31,7 +42,11 @@ router.get("/user/:id_usuario", auth, userPermissionController.getUserPermission
  * @param {string} id_permissao - The ID of the permission to check
  * @returns {Array} List of users who have the specified permission
  */
-router.get("/permission/:id_permissao", auth, userPermissionController.getPermissionUsers);
+router.get(
+  '/permission/:id_permissao',
+  auth,
+  userPermissionController.getPermissionUsers
+);
 
 /**
  * @route DELETE /api/user-permissions
@@ -42,6 +57,6 @@ router.get("/permission/:id_permissao", auth, userPermissionController.getPermis
  * @body {string} revokeData.permissionId - ID of the permission to revoke
  * @returns {Object} Success message or deletion confirmation
  */
-router.delete("/", auth, userPermissionController.removePermissionFromUser);
+router.delete('/', auth, userPermissionController.removePermissionFromUser);
 
 module.exports = router;

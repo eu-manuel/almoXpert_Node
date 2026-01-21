@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/db");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
 const Item = sequelize.define(
-  "Item",
+  'Item',
   {
     id_item: {
       type: DataTypes.INTEGER,
@@ -38,11 +38,11 @@ const Item = sequelize.define(
     },
     status: {
       type: DataTypes.STRING,
-      defaultValue: "ativo", // ativo/inativo
+      defaultValue: 'ativo', // ativo/inativo
     },
   },
   {
-    tableName: "Items",
+    tableName: 'Items',
     timestamps: false,
   }
 );

@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Items',   // nome da tabela de itens
+          model: 'Items', // nome da tabela de itens
           key: 'id_item',
         },
         onUpdate: 'CASCADE',
@@ -34,5 +34,5 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('ItemCategories');
-  }
+  },
 };

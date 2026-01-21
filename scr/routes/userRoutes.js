@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const userController = require("../controllers/userController");
-const auth = require("../middlewares/auth");
-const validateUser= require("../middlewares/validateUser")
+const userController = require('../controllers/userController');
+const auth = require('../middlewares/auth');
+const validateUser = require('../middlewares/validateUser');
 
 /**
  * @route GET /api/users
@@ -14,8 +14,7 @@ const validateUser= require("../middlewares/validateUser")
  * @property {string} email - User email
  * @property {boolean} isAdmin - Whether the user is an administrator
  */
-router.get("/", auth, userController.listUsers);
-
+router.get('/', auth, userController.listUsers);
 
 /**
  * @route GET /api/users/:id
@@ -24,7 +23,7 @@ router.get("/", auth, userController.listUsers);
  * @param {string} id - The ID of the user to retrieve
  * @returns {Object} The requested user's information (excluding sensitive data)
  */
-router.get("/:id", auth, userController.getUserById);
+router.get('/:id', auth, userController.getUserById);
 
 /**
  * @route PUT /api/users/:id
@@ -34,7 +33,7 @@ router.get("/:id", auth, userController.getUserById);
  * @body {Object} updateData - The fields to update (nome, email, isAdmin)
  * @returns {Object} The updated user information (excluding sensitive data)
  */
-router.put("/:id", auth, validateUser.update, userController.updateUser);
+router.put('/:id', auth, validateUser.update, userController.updateUser);
 
 /**
  * @route DELETE /api/users/:id
@@ -43,6 +42,6 @@ router.put("/:id", auth, validateUser.update, userController.updateUser);
  * @param {string} id - The ID of the user to delete
  * @returns {Object} Success message or deletion confirmation
  */
-router.delete("/:id", auth, userController.deleteUser);
+router.delete('/:id', auth, userController.deleteUser);
 
 module.exports = router;

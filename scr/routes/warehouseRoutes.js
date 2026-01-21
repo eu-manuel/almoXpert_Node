@@ -1,9 +1,12 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const warehouseController = require("../controllers/warehouseController");
-const auth = require("../middlewares/auth");
-const isAdmin = require("../middlewares/isAdmin");
-const { validateWarehouseCreate, validateWarehouseUpdate } = require("../middlewares/validateWarehouse");
+const warehouseController = require('../controllers/warehouseController');
+const auth = require('../middlewares/auth');
+const isAdmin = require('../middlewares/isAdmin');
+const {
+  validateWarehouseCreate,
+  validateWarehouseUpdate,
+} = require('../middlewares/validateWarehouse');
 
 /**
  * @route POST /api/warehouse
@@ -18,8 +21,12 @@ const { validateWarehouseCreate, validateWarehouseUpdate } = require("../middlew
  * @body {string} [warehouseData.status] - Warehouse status ("ativo" or "inativo", default "ativo")
  * @returns {Object} The newly created warehouse
  */
-router.post("/", auth, validateWarehouseCreate, warehouseController.createWarehouse);
-
+router.post(
+  '/',
+  auth,
+  validateWarehouseCreate,
+  warehouseController.createWarehouse
+);
 
 /**
  * @route GET /api/warehouse/my
@@ -27,7 +34,7 @@ router.post("/", auth, validateWarehouseCreate, warehouseController.createWareho
  * @access Private - Requires authentication
  * @returns {Array} List of warehouses the user is responsible for
  */
-router.get("/my", auth, warehouseController.getMyWarehouses);
+router.get('/my', auth, warehouseController.getMyWarehouses);
 
 /**
  * @route GET /api/warehouse
@@ -35,7 +42,7 @@ router.get("/my", auth, warehouseController.getMyWarehouses);
  * @access Private - Requires authentication
  * @returns {Array} List of all warehouses with their information
  */
-router.get("/", auth, warehouseController.getWarehouses);
+router.get('/', auth, warehouseController.getWarehouses);
 
 /**
  * @route GET /api/warehouse/:id
@@ -44,7 +51,7 @@ router.get("/", auth, warehouseController.getWarehouses);
  * @param {string} id - The ID of the warehouse to retrieve
  * @returns {Object} The requested warehouse's information
  */
-router.get("/:id", auth, warehouseController.getWarehouseById);
+router.get('/:id', auth, warehouseController.getWarehouseById);
 
 /**
  * @route GET /api/warehouse/:id/stats
@@ -53,7 +60,7 @@ router.get("/:id", auth, warehouseController.getWarehouseById);
  * @param {string} id - The ID of the warehouse
  * @returns {Object} Statistics including movementsCount, itemsCount, hasLinkedData
  */
-router.get("/:id/stats", auth, warehouseController.getWarehouseStats);
+router.get('/:id/stats', auth, warehouseController.getWarehouseStats);
 
 /**
  * @route PUT /api/warehouse/:id
@@ -63,7 +70,12 @@ router.get("/:id/stats", auth, warehouseController.getWarehouseStats);
  * @body {Object} updateData - The fields to update (name, location, description)
  * @returns {Object} The updated warehouse information
  */
-router.put("/:id", auth, validateWarehouseUpdate, warehouseController.updateWarehouse);
+router.put(
+  '/:id',
+  auth,
+  validateWarehouseUpdate,
+  warehouseController.updateWarehouse
+);
 
 /**
  * @route DELETE /api/warehouse/:id
@@ -72,6 +84,6 @@ router.put("/:id", auth, validateWarehouseUpdate, warehouseController.updateWare
  * @param {string} id - The ID of the warehouse to delete
  * @returns {Object} Success message with deleted links count
  */
-router.delete("/:id", auth, isAdmin, warehouseController.deleteWarehouse);
+router.delete('/:id', auth, isAdmin, warehouseController.deleteWarehouse);
 
 module.exports = router;

@@ -1,8 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const itemWarehouseController = require("../controllers/itemWarehouseController");
-const auth = require("../middlewares/auth");
-const { validateItemWarehouseCreate, validateItemWarehouseUpdate } = require("../middlewares/validateItemWarehouse");
+const itemWarehouseController = require('../controllers/itemWarehouseController');
+const auth = require('../middlewares/auth');
+const {
+  validateItemWarehouseCreate,
+  validateItemWarehouseUpdate,
+} = require('../middlewares/validateItemWarehouse');
 
 /**
  * @route POST /api/item-warehouses
@@ -16,8 +19,12 @@ const { validateItemWarehouseCreate, validateItemWarehouseUpdate } = require("..
  * @body {Date} [entryData.data_saida] - Exit date (optional)
  * @returns {Object} The created item-warehouse relationship
  */
-router.post("/", auth, validateItemWarehouseCreate, itemWarehouseController.createItemWarehouse);
-
+router.post(
+  '/',
+  auth,
+  validateItemWarehouseCreate,
+  itemWarehouseController.createItemWarehouse
+);
 
 /**
  * @route GET /api/item-warehouses
@@ -25,7 +32,7 @@ router.post("/", auth, validateItemWarehouseCreate, itemWarehouseController.crea
  * @access Private - Requires authentication
  * @returns {Array} List of all item-warehouse relationships with quantities
  */
-router.get("/", auth, itemWarehouseController.getItemWarehouses);
+router.get('/', auth, itemWarehouseController.getItemWarehouses);
 
 /**
  * @route GET /api/item-warehouses/:id
@@ -34,7 +41,7 @@ router.get("/", auth, itemWarehouseController.getItemWarehouses);
  * @param {string} id - The ID of the item-warehouse relationship to retrieve
  * @returns {Object} The requested item-warehouse relationship details
  */
-router.get("/:id", auth, itemWarehouseController.getItemWarehouseById);
+router.get('/:id', auth, itemWarehouseController.getItemWarehouseById);
 
 /**
  * @route PUT /api/item-warehouses/:id
@@ -45,7 +52,12 @@ router.get("/:id", auth, itemWarehouseController.getItemWarehouseById);
  * @body {number} updateData.quantity - New quantity of the item in the warehouse
  * @returns {Object} The updated item-warehouse relationship
  */
-router.put("/:id", auth, validateItemWarehouseUpdate, itemWarehouseController.updateItemWarehouse);
+router.put(
+  '/:id',
+  auth,
+  validateItemWarehouseUpdate,
+  itemWarehouseController.updateItemWarehouse
+);
 
 /**
  * @route DELETE /api/item-warehouses/:id
@@ -54,6 +66,6 @@ router.put("/:id", auth, validateItemWarehouseUpdate, itemWarehouseController.up
  * @param {string} id - The ID of the item-warehouse relationship to delete
  * @returns {Object} Success message or deletion confirmation
  */
-router.delete("/:id", auth, itemWarehouseController.deleteItemWarehouse);
+router.delete('/:id', auth, itemWarehouseController.deleteItemWarehouse);
 
 module.exports = router;
