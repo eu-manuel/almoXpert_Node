@@ -1,7 +1,7 @@
 // schemas/userSchema.js
 const { z } = require("zod");
 
-// Schema para criação (mantemos o seu original)
+// Schema para criação (sem cargo - novos usuários sempre isAdmin: false)
 const userSchema = z.object({
   nome: z.string({
       required_error: "O nome é obrigatório.",
@@ -20,12 +20,6 @@ const userSchema = z.object({
       invalid_type_error: "A senha deve ser uma string.",
     })
     .min(6, "A senha deve ter pelo menos 6 caracteres."),
-
-  cargo: z.string({
-      required_error: "O cargo é obrigatório.",
-      invalid_type_error: "O cargo deve ser uma string.",
-    })
-    .min(2, "O cargo deve ter pelo menos 2 caracteres."),
 });
 
 // Schema para atualização (todos os campos opcionais, mas validados se fornecidos)
@@ -48,10 +42,9 @@ const userUpdateSchema = z.object({
     .min(6, "A senha deve ter pelo menos 6 caracteres.")
     .optional(),
 
-  cargo: z.string({
-      invalid_type_error: "O cargo deve ser uma string.",
+  isAdmin: z.boolean({
+      invalid_type_error: "isAdmin deve ser um booleano.",
     })
-    .min(2, "O cargo deve ter pelo menos 2 caracteres.")
     .optional(),
 });
 

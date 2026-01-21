@@ -12,7 +12,7 @@ const validateUser= require("../middlewares/validateUser")
  * @property {number} id_usuario - User ID
  * @property {string} nome - User name
  * @property {string} email - User email
- * @property {string} cargo - User role or position
+ * @property {boolean} isAdmin - Whether the user is an administrator
  */
 router.get("/", auth, userController.listUsers);
 
@@ -31,7 +31,7 @@ router.get("/:id", auth, userController.getUserById);
  * @description Update an existing user's information
  * @access Private - Requires authentication
  * @param {string} id - The ID of the user to update
- * @body {Object} updateData - The fields to update (name, email, role, etc.)
+ * @body {Object} updateData - The fields to update (nome, email, isAdmin)
  * @returns {Object} The updated user information (excluding sensitive data)
  */
 router.put("/:id", auth, validateUser.update, userController.updateUser);

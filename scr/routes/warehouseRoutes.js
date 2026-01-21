@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const warehouseController = require("../controllers/warehouseController");
 const auth = require("../middlewares/auth");
+const isAdmin = require("../middlewares/isAdmin");
 const { validateWarehouseCreate, validateWarehouseUpdate } = require("../middlewares/validateWarehouse");
 
 /**
@@ -46,6 +47,15 @@ router.get("/", auth, warehouseController.getWarehouses);
 router.get("/:id", auth, warehouseController.getWarehouseById);
 
 /**
+ * @route GET /api/warehouse/:id/stats
+ * @description Get warehouse statistics (linked movements and items count)
+ * @access Private - Requires authentication
+ * @param {string} id - The ID of the warehouse
+ * @returns {Object} Statistics including movementsCount, itemsCount, hasLinkedData
+ */
+router.get("/:id/stats", auth, warehouseController.getWarehouseStats);
+
+/**
  * @route PUT /api/warehouse/:id
  * @description Update an existing warehouse's information
  * @access Private - Requires authentication
@@ -57,11 +67,11 @@ router.put("/:id", auth, validateWarehouseUpdate, warehouseController.updateWare
 
 /**
  * @route DELETE /api/warehouse/:id
- * @description Remove a warehouse from the system
- * @access Private - Requires authentication
+ * @description Remove a warehouse from the system (cascade delete)
+ * @access Private - Requires authentication AND admin role
  * @param {string} id - The ID of the warehouse to delete
- * @returns {Object} Success message or deletion confirmation
+ * @returns {Object} Success message with deleted links count
  */
-router.delete("/:id", auth, warehouseController.deleteWarehouse);
+router.delete("/:id", auth, isAdmin, warehouseController.deleteWarehouse);
 
 module.exports = router;
