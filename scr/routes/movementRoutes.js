@@ -1,8 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const movementController = require("../controllers/movementController");
-const auth = require("../middlewares/auth");
-const { validateMovementCreate, validateMovementUpdate } = require("../middlewares/validateMovement");
+const movementController = require('../controllers/movementController');
+const auth = require('../middlewares/auth');
+const {
+  validateMovementCreate,
+  validateMovementUpdate,
+} = require('../middlewares/validateMovement');
 
 /**
  * @route POST /api/moviment
@@ -18,7 +21,12 @@ const { validateMovementCreate, validateMovementUpdate } = require("../middlewar
  * @body {Date} [movementData.data_movimentacao] - Date of the movement (optional, defaults to current date)
  * @returns {Object} The newly created movement record
  */
-router.post("/", auth, validateMovementCreate, movementController.createMovement);
+router.post(
+  '/',
+  auth,
+  validateMovementCreate,
+  movementController.createMovement
+);
 
 /**
  * @route GET /api/moviment
@@ -26,7 +34,7 @@ router.post("/", auth, validateMovementCreate, movementController.createMovement
  * @access Private - Requires authentication
  * @returns {Array} List of all movements with their information
  */
-router.get("/", auth, movementController.getMovements);
+router.get('/', auth, movementController.getMovements);
 
 /**
  * @route GET /api/moviment/:id
@@ -35,7 +43,7 @@ router.get("/", auth, movementController.getMovements);
  * @param {string} id - The ID of the movement to retrieve
  * @returns {Object} The requested movement's information
  */
-router.get("/:id", auth, movementController.getMovementById);
+router.get('/:id', auth, movementController.getMovementById);
 
 /**
  * @route PUT /api/moviment/:id
@@ -45,7 +53,12 @@ router.get("/:id", auth, movementController.getMovementById);
  * @body {Object} updateData - The fields to update
  * @returns {Object} The updated movement information
  */
-router.put("/:id", auth, validateMovementUpdate, movementController.updateMovement);
+router.put(
+  '/:id',
+  auth,
+  validateMovementUpdate,
+  movementController.updateMovement
+);
 
 /**
  * @route DELETE /api/moviment/:id
@@ -54,6 +67,6 @@ router.put("/:id", auth, validateMovementUpdate, movementController.updateMoveme
  * @param {string} id - The ID of the movement to delete
  * @returns {Object} Success message or deletion confirmation
  */
-router.delete("/:id", auth, movementController.deleteMovement);
+router.delete('/:id', auth, movementController.deleteMovement);
 
 module.exports = router;

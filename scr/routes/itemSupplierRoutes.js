@@ -1,8 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const itemSupplierController = require("../controllers/itemSupplierController");
-const auth = require("../middlewares/auth");
-const { validateItemSupplierCreate, validateItemSupplierUpdate } = require("../middlewares/validateItemSupplier");
+const itemSupplierController = require('../controllers/itemSupplierController');
+const auth = require('../middlewares/auth');
+const {
+  validateItemSupplierCreate,
+  validateItemSupplierUpdate,
+} = require('../middlewares/validateItemSupplier');
 
 /**
  * @route POST /api/item-suppliers
@@ -15,8 +18,12 @@ const { validateItemSupplierCreate, validateItemSupplierUpdate } = require("../m
  * @body {string} [relationData.prazo_entrega] - Delivery time for the item (optional, e.g., "7 dias")
  * @returns {Object} The created item-supplier relationship
  */
-router.post("/", auth, validateItemSupplierCreate, itemSupplierController.createItemSupplier);
-
+router.post(
+  '/',
+  auth,
+  validateItemSupplierCreate,
+  itemSupplierController.createItemSupplier
+);
 
 /**
  * @route GET /api/item-supplier
@@ -24,7 +31,7 @@ router.post("/", auth, validateItemSupplierCreate, itemSupplierController.create
  * @access Private - Requires authentication
  * @returns {Array} List of all item-supplier relationships
  */
-router.get("/", auth, itemSupplierController.getItemSuppliers);
+router.get('/', auth, itemSupplierController.getItemSuppliers);
 
 /**
  * @route GET /api/item-supplier/:id
@@ -33,7 +40,7 @@ router.get("/", auth, itemSupplierController.getItemSuppliers);
  * @param {string} id - The ID of the item-supplier relationship to retrieve
  * @returns {Object} The requested item-supplier relationship details
  */
-router.get("/:id", auth, itemSupplierController.getItemSupplierById);
+router.get('/:id', auth, itemSupplierController.getItemSupplierById);
 
 /**
  * @route PUT /api/item-supplier/:id
@@ -45,7 +52,12 @@ router.get("/:id", auth, itemSupplierController.getItemSupplierById);
  * @body {string} updateData.supplierCode - Updated supplier's code for this item
  * @returns {Object} The updated item-supplier relationship
  */
-router.put("/:id", auth, validateItemSupplierUpdate, itemSupplierController.updateItemSupplier);
+router.put(
+  '/:id',
+  auth,
+  validateItemSupplierUpdate,
+  itemSupplierController.updateItemSupplier
+);
 
 /**
  * @route DELETE /api/item-supplier/:id
@@ -54,6 +66,6 @@ router.put("/:id", auth, validateItemSupplierUpdate, itemSupplierController.upda
  * @param {string} id - The ID of the item-supplier relationship to delete
  * @returns {Object} Success message or deletion confirmation
  */
-router.delete("/:id", auth, itemSupplierController.deleteItemSupplier);
+router.delete('/:id', auth, itemSupplierController.deleteItemSupplier);
 
 module.exports = router;

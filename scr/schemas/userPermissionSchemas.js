@@ -1,20 +1,20 @@
-const { z } = require("zod");
+const { z } = require('zod');
 
 const userPermissionCreateSchema = z.object({
-    id_usuario: z
-        .number({
-            required_error: "O ID do usuário é obrigatório.",
-            invalid_type_error: "O ID do usuário deve ser um número.",
-        })
-        .int("O ID do usuário deve ser um número inteiro.")
-        .positive("O ID do usuário deve ser um número positivo."),
-    id_permissao: z
-        .number({
-            required_error: "O ID da permissão é obrigatório.",
-            invalid_type_error: "O ID da permissão deve ser um número.",
-        })
-        .int("O ID da permissão deve ser um número inteiro.")
-        .positive("O ID da permissão deve ser um número positivo."),
+  id_usuario: z
+    .number({
+      required_error: 'O ID do usuário é obrigatório.',
+      invalid_type_error: 'O ID do usuário deve ser um número.',
+    })
+    .int('O ID do usuário deve ser um número inteiro.')
+    .positive('O ID do usuário deve ser um número positivo.'),
+  id_permissao: z
+    .number({
+      required_error: 'O ID da permissão é obrigatório.',
+      invalid_type_error: 'O ID da permissão deve ser um número.',
+    })
+    .int('O ID da permissão deve ser um número inteiro.')
+    .positive('O ID da permissão deve ser um número positivo.'),
 });
 
 // Como essa é uma tabela de relacionamento simples, sem atributos adicionais,

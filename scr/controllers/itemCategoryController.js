@@ -1,12 +1,12 @@
-const Item = require("../models/Item");
-const Category = require("../models/Category");
-const ItemCategory = require("../models/ItemCategory");
+const Item = require('../models/Item');
+const Category = require('../models/Category');
+const ItemCategory = require('../models/ItemCategory');
 
 // Listar todas as associações
 exports.getAllRelations = async (req, res) => {
   try {
     const relations = await ItemCategory.findAll({
-      include: [Item, Category]
+      include: [Item, Category],
     });
     res.json(relations);
   } catch (err) {
@@ -23,13 +23,15 @@ exports.addRelation = async (req, res) => {
     const category = await Category.findByPk(categoryId);
 
     if (!item || !category) {
-      return res.status(404).json({ error: "Item ou Categoria não encontrados" });
+      return res
+        .status(404)
+        .json({ error: 'Item ou Categoria não encontrados' });
     }
 
     // Cria vínculo na tabela intermediária
     await ItemCategory.create({ id_item: itemId, id_categoria: categoryId });
 
-    res.json({ message: "Relacionamento criado com sucesso" });
+    res.json({ message: 'Relacionamento criado com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -41,15 +43,15 @@ exports.removeRelation = async (req, res) => {
     const { itemId, categoryId } = req.body;
 
     const relation = await ItemCategory.findOne({
-      where: { id_item: itemId, id_categoria: categoryId }
+      where: { id_item: itemId, id_categoria: categoryId },
     });
 
     if (!relation) {
-      return res.status(404).json({ error: "Relacionamento não encontrado" });
+      return res.status(404).json({ error: 'Relacionamento não encontrado' });
     }
 
     await relation.destroy();
-    res.json({ message: "Relacionamento removido com sucesso" });
+    res.json({ message: 'Relacionamento removido com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

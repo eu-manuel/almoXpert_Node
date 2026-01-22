@@ -1,4 +1,4 @@
-const Supplier = require("../models/Supplier");
+const Supplier = require('../models/Supplier');
 
 // Criar fornecedor
 exports.createSupplier = async (req, res) => {
@@ -24,7 +24,8 @@ exports.getSuppliers = async (req, res) => {
 exports.getSupplierById = async (req, res) => {
   try {
     const supplier = await Supplier.findByPk(req.params.id);
-    if (!supplier) return res.status(404).json({ error: "Fornecedor não encontrado" });
+    if (!supplier)
+      return res.status(404).json({ error: 'Fornecedor não encontrado' });
     res.json(supplier);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -35,7 +36,8 @@ exports.getSupplierById = async (req, res) => {
 exports.updateSupplier = async (req, res) => {
   try {
     const supplier = await Supplier.findByPk(req.params.id);
-    if (!supplier) return res.status(404).json({ error: "Fornecedor não encontrado" });
+    if (!supplier)
+      return res.status(404).json({ error: 'Fornecedor não encontrado' });
     await supplier.update(req.body);
     res.json(supplier);
   } catch (err) {
@@ -47,9 +49,10 @@ exports.updateSupplier = async (req, res) => {
 exports.deleteSupplier = async (req, res) => {
   try {
     const supplier = await Supplier.findByPk(req.params.id);
-    if (!supplier) return res.status(404).json({ error: "Fornecedor não encontrado" });
+    if (!supplier)
+      return res.status(404).json({ error: 'Fornecedor não encontrado' });
     await supplier.destroy();
-    res.json({ message: "Fornecedor removido com sucesso" });
+    res.json({ message: 'Fornecedor removido com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

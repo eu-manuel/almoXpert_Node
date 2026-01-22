@@ -1,4 +1,4 @@
-const Item = require("../models/Item");
+const Item = require('../models/Item');
 
 // Criar novo item
 exports.createItem = async (req, res) => {
@@ -24,7 +24,7 @@ exports.getItems = async (req, res) => {
 exports.getItemById = async (req, res) => {
   try {
     const item = await Item.findByPk(req.params.id);
-    if (!item) return res.status(404).json({ error: "Item não encontrado" });
+    if (!item) return res.status(404).json({ error: 'Item não encontrado' });
     res.json(item);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -35,7 +35,7 @@ exports.getItemById = async (req, res) => {
 exports.updateItem = async (req, res) => {
   try {
     const item = await Item.findByPk(req.params.id);
-    if (!item) return res.status(404).json({ error: "Item não encontrado" });
+    if (!item) return res.status(404).json({ error: 'Item não encontrado' });
     await item.update(req.body);
     res.json(item);
   } catch (err) {
@@ -47,9 +47,9 @@ exports.updateItem = async (req, res) => {
 exports.deleteItem = async (req, res) => {
   try {
     const item = await Item.findByPk(req.params.id);
-    if (!item) return res.status(404).json({ error: "Item não encontrado" });
+    if (!item) return res.status(404).json({ error: 'Item não encontrado' });
     await item.destroy();
-    res.json({ message: "Item removido com sucesso" });
+    res.json({ message: 'Item removido com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("ItemSuppliers", {
+    await queryInterface.createTable('ItemSuppliers', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -13,21 +13,21 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Items", // nome da tabela de itens
-          key: "id_item", // chave primária do Item
+          model: 'Items', // nome da tabela de itens
+          key: 'id_item', // chave primária do Item
         },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       supplierId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Suppliers", // nome da tabela de suppliers
-          key: "id", // chave primária do Supplier
+          model: 'Suppliers', // nome da tabela de suppliers
+          key: 'id', // chave primária do Supplier
         },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       preco: {
         type: Sequelize.DECIMAL(10, 2),
@@ -41,6 +41,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("ItemSuppliers");
+    await queryInterface.dropTable('ItemSuppliers');
   },
 };

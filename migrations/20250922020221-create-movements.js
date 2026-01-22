@@ -1,63 +1,63 @@
-"use strict";
+'use strict';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Movements", {
+    await queryInterface.createTable('Movements', {
       id_movimentacao: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false
+        allowNull: false,
       },
       tipo: {
-        type: Sequelize.ENUM("entrada", "saida", "transferencia", "ajuste"),
-        allowNull: false
+        type: Sequelize.ENUM('entrada', 'saida', 'transferencia', 'ajuste'),
+        allowNull: false,
       },
       data_movimentacao: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+        defaultValue: Sequelize.NOW,
       },
       quantidade: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       observacao: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       id_item: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Items", // tabela de Item
-          key: "id_item"
+          model: 'Items', // tabela de Item
+          key: 'id_item',
         },
-        onUpdate: "CASCADE",
-        onDelete: "RESTRICT"
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT',
       },
       id_almoxarifado: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Warehouses", // tabela de Warehouse
-          key: "id_almoxarifado"
+          model: 'Warehouses', // tabela de Warehouse
+          key: 'id_almoxarifado',
         },
-        onUpdate: "CASCADE",
-        onDelete: "RESTRICT"
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT',
       },
       id_usuario: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: "Users", // tabela de User
-          key: "id_usuario"
+          model: 'Users', // tabela de User
+          key: 'id_usuario',
         },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL"
-      }
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Movements");
-  }
+    await queryInterface.dropTable('Movements');
+  },
 };

@@ -1,20 +1,20 @@
-const { z } = require("zod");
+const { z } = require('zod');
 
 const itemCategoryCreateSchema = z.object({
-    id_item: z
-        .number({
-            required_error: "O ID do item é obrigatório.",
-            invalid_type_error: "O ID do item deve ser um número.",
-        })
-        .int("O ID do item deve ser um número inteiro.")
-        .positive("O ID do item deve ser um número positivo."),
-    id_categoria: z
-        .number({
-            required_error: "O ID da categoria é obrigatório.",
-            invalid_type_error: "O ID da categoria deve ser um número.",
-        })
-        .int("O ID da categoria deve ser um número inteiro.")
-        .positive("O ID da categoria deve ser um número positivo."),
+  id_item: z
+    .number({
+      required_error: 'O ID do item é obrigatório.',
+      invalid_type_error: 'O ID do item deve ser um número.',
+    })
+    .int('O ID do item deve ser um número inteiro.')
+    .positive('O ID do item deve ser um número positivo.'),
+  id_categoria: z
+    .number({
+      required_error: 'O ID da categoria é obrigatório.',
+      invalid_type_error: 'O ID da categoria deve ser um número.',
+    })
+    .int('O ID da categoria deve ser um número inteiro.')
+    .positive('O ID da categoria deve ser um número positivo.'),
 });
 
 // Como essa é uma tabela de relacionamento simples, sem atributos adicionais,

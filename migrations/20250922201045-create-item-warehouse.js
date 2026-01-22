@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("ItemWarehouses", {
+    await queryInterface.createTable('ItemWarehouses', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -13,21 +13,21 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Items", // tabela referenciada
-          key: "id_item",
+          model: 'Items', // tabela referenciada
+          key: 'id_item',
         },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       id_almoxarifado: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Warehouses", // tabela referenciada
-          key: "id_almoxarifado",
+          model: 'Warehouses', // tabela referenciada
+          key: 'id_almoxarifado',
         },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       quantidade: {
         type: Sequelize.INTEGER,
@@ -37,7 +37,7 @@ module.exports = {
       data_entrada: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.fn("NOW"),
+        defaultValue: Sequelize.fn('NOW'),
       },
       data_saida: {
         type: Sequelize.DATE,
@@ -47,6 +47,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("ItemWarehouses");
+    await queryInterface.dropTable('ItemWarehouses');
   },
 };

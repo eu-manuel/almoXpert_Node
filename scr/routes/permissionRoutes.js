@@ -1,8 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const permissionController = require("../controllers/permissionController");
-const auth = require("../middlewares/auth");
-const { validatePermissionCreate, validatePermissionUpdate } = require("../middlewares/validatePermission");
+const permissionController = require('../controllers/permissionController');
+const auth = require('../middlewares/auth');
+const {
+  validatePermissionCreate,
+  validatePermissionUpdate,
+} = require('../middlewares/validatePermission');
 
 /**
  * @route POST /api/permissions
@@ -13,7 +16,12 @@ const { validatePermissionCreate, validatePermissionUpdate } = require("../middl
  * @body {string} permissionData.description - Permission description
  * @returns {Object} The newly created permission
  */
-router.post("/", auth, validatePermissionCreate, permissionController.createPermission);
+router.post(
+  '/',
+  auth,
+  validatePermissionCreate,
+  permissionController.createPermission
+);
 
 /**
  * @route GET /api/permissions
@@ -21,7 +29,7 @@ router.post("/", auth, validatePermissionCreate, permissionController.createPerm
  * @access Private - Requires authentication
  * @returns {Array} List of all permissions with their information
  */
-router.get("/", auth, permissionController.getPermissions);
+router.get('/', auth, permissionController.getPermissions);
 
 /**
  * @route GET /api/permissions/:id
@@ -30,7 +38,7 @@ router.get("/", auth, permissionController.getPermissions);
  * @param {string} id - The ID of the permission to retrieve
  * @returns {Object} The requested permission's information
  */
-router.get("/:id", auth, permissionController.getPermissionById);
+router.get('/:id', auth, permissionController.getPermissionById);
 
 /**
  * @route PUT /api/permissions/:id
@@ -40,7 +48,12 @@ router.get("/:id", auth, permissionController.getPermissionById);
  * @body {Object} updateData - The fields to update (name, description, resource, action)
  * @returns {Object} The updated permission information
  */
-router.put("/:id", auth, validatePermissionUpdate, permissionController.updatePermission);
+router.put(
+  '/:id',
+  auth,
+  validatePermissionUpdate,
+  permissionController.updatePermission
+);
 
 /**
  * @route DELETE /api/permissions/:id
@@ -49,6 +62,6 @@ router.put("/:id", auth, validatePermissionUpdate, permissionController.updatePe
  * @param {string} id - The ID of the permission to delete
  * @returns {Object} Success message or deletion confirmation
  */
-router.delete("/:id", auth, permissionController.deletePermission);
+router.delete('/:id', auth, permissionController.deletePermission);
 
 module.exports = router;

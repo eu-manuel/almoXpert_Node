@@ -7,20 +7,20 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false
+        allowNull: false,
       },
       nome: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
       },
       descricao: {
-        type: Sequelize.STRING
-      }
+        type: Sequelize.STRING,
+      },
     });
   },
 
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Permissions');
-  }
+  },
 };

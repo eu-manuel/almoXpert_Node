@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const itemController = require("../controllers/itemController");
-const auth = require("../middlewares/auth");
-const validateItem = require("../middlewares/validateItem");
+const itemController = require('../controllers/itemController');
+const auth = require('../middlewares/auth');
+const validateItem = require('../middlewares/validateItem');
 
 /**
  * @route POST /api/items
@@ -19,14 +19,14 @@ const validateItem = require("../middlewares/validateItem");
  * @body {string} [itemData.status] - Item status ("ativo" or "inativo", default "ativo")
  * @returns {Object} The newly created item
  */
-router.post("/", auth, validateItem.create, itemController.createItem);
+router.post('/', auth, validateItem.create, itemController.createItem);
 /**
  * @route GET /api/items
  * @description Retrieve all items from the inventory
  * @access Private - Requires authentication
  * @returns {Array} List of all items with their complete information
  */
-router.get("/", auth, itemController.getItems);
+router.get('/', auth, itemController.getItems);
 
 /**
  * @route GET /api/items/:id
@@ -35,7 +35,7 @@ router.get("/", auth, itemController.getItems);
  * @param {string} id - The ID of the item to retrieve
  * @returns {Object} The requested item's complete information
  */
-router.get("/:id", auth, itemController.getItemById);
+router.get('/:id', auth, itemController.getItemById);
 
 /**
  * @route PUT /api/items/:id
@@ -45,7 +45,7 @@ router.get("/:id", auth, itemController.getItemById);
  * @body {Object} updateData - The fields to update (name, description, quantity, etc.)
  * @returns {Object} The updated item information
  */
-router.put("/:id", auth, validateItem.update, itemController.updateItem);
+router.put('/:id', auth, validateItem.update, itemController.updateItem);
 
 /**
  * @route DELETE /api/items/:id
@@ -54,6 +54,6 @@ router.put("/:id", auth, validateItem.update, itemController.updateItem);
  * @param {string} id - The ID of the item to delete
  * @returns {Object} Success message or deletion confirmation
  */
-router.delete("/:id", auth, itemController.deleteItem);
+router.delete('/:id', auth, itemController.deleteItem);
 
 module.exports = router;
